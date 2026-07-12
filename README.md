@@ -3,7 +3,7 @@
 [![Hexlet Check](https://github.com/Slovuan-Swan/frontend-project-386/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Slovuan-Swan/frontend-project-386/actions)
 [![Playwright E2E](https://github.com/Slovuan-Swan/frontend-project-386/actions/workflows/playwright.yml/badge.svg)](https://github.com/Slovuan-Swan/frontend-project-386/actions/workflows/playwright.yml)
 
-Сервис бронирования встреч с публичной (гостевой) и административной частями.  
+Сервис бронирования встреч с публичной и административной частями.  
 Проект выполнен в подходе **Design First** — API-контракт описан на [TypeSpec](https://typespec.io/) до реализации.
 
 ## 🚀 Демо
