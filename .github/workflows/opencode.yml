@@ -28,4 +28,4 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         with:
           provider: openrouter
-          model: nvidia/llama-nemotron-rerank-vl-1b-v2
+          model: openrouter/qwen/qwen3-coder-480b-a35b-instruct:free
