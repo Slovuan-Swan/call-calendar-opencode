@@ -28,4 +28,4 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         with:
           provider: openrouter
-          model: qwen/qwen3-coder:free
+          model: qwen/qwen3-coder-30b-a3b-instruct
