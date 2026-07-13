@@ -6,11 +6,11 @@ on:
 
 jobs:
   opencode:
+    # Запускаем только если коммент содержит команду и автора-владельца
     if: |
       contains(github.event.comment.body, '/oc') || 
       contains(github.event.comment.body, '/opencode')
     runs-on: ubuntu-latest
-    # Явно даем права внутри воркфлоу на запись в issues
     permissions:
       issues: write
       pull-requests: write
@@ -20,9 +20,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # Скачиваем только последний коммит, чтобы не виснуть
 
       - name: Run OpenCode
-        uses: anomalyco/opencode/github@latest
+        # Фиксируем конкретную стабильную ветку v1 вместо плавающего latest
+        uses: anomalyco/opencode/github@v1
         env:
           GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         with:
