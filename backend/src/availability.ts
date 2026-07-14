@@ -37,7 +37,8 @@ export function generateAvailableSlots(
           break;
         }
         const startISO = formatISO(slotStart);
-        if (!isSlotTaken(startISO)) {
+        const endISO = formatISO(slotEnd);
+        if (!isSlotTaken(startISO, endISO)) {
           slots.push({
             startAt: startISO,
             endAt: formatISO(slotEnd)

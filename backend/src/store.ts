@@ -33,8 +33,8 @@ export function addBooking(booking: Booking): void {
   bookings.push(booking);
 }
 
-export function isSlotTaken(startAt: string): boolean {
-  return bookings.some((b) => b.startAt === startAt);
+export function isSlotTaken(startAt: string, endAt: string): boolean {
+  return bookings.some((b) => startAt < b.endAt && endAt > b.startAt);
 }
 
 export function getBookings(from?: string): Booking[] {
