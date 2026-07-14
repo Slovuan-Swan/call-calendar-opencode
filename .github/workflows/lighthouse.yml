@@ -2,7 +2,6 @@ name: Lighthouse Audit
 
 on:
   schedule:
-    # Каждый день в 3:00 UTC (пример)
     - cron: "0 3 * * *"
   workflow_dispatch: # ручной запуск
 
@@ -18,29 +17,22 @@ jobs:
         with:
           node-version: 20
 
-      # Устанавливаем зависимости для всего проекта
       - name: Install all dependencies
         run: |
           npm ci
           cd backend && npm ci
           cd ../frontend && npm ci
 
-      # Собираем фронтенд и бэкенд (если нужно)
       - name: Build
         run: |
           cd backend && npm run build
           cd ../frontend && npm run build
 
-      # Запускаем приложение в фоне (используем start:test)
       - name: Start application
         run: |
           npm run start:test &
-          echo "Waiting for servers to be ready..."
-          npx wait-on http://localhost:5173 http://localhost:3000
-        env:
-          PORT: 3000
+          sleep 10
 
-      # Запускаем Lighthouse для ключевых страниц
       - name: Run Lighthouse on guest page
         run: |
           npx lighthouse http://localhost:5173/ \
@@ -51,7 +43,6 @@ jobs:
 
       - name: Run Lighthouse on booking page
         run: |
-          # Предположим, что есть тип события с id "intro", иначе предварительно создадим
           npx lighthouse http://localhost:5173/book/intro \
             --output=html,json \
             --output-path=./lighthouse-results/guest-booking \
@@ -66,7 +57,6 @@ jobs:
             --chrome-flags="--no-sandbox --headless" \
             --max-wait-for-load=30000
 
-      # Сохраняем отчёты как артефакт сборки
       - uses: actions/upload-artifact@v4
         if: always()
         with:
