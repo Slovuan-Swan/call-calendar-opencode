@@ -34,9 +34,13 @@ export function addBooking(booking: Booking): void {
 }
 
 export function isSlotTaken(startAt: string, endAt: string): boolean {
-  return bookings.some(
-    (b) => startAt < b.endAt && endAt > b.startAt,
-  );
+  return bookings.some((b) => {
+    const newStart = startAt;
+    const newEnd = endAt;
+    const existingStart = b.startAt;
+    const existingEnd = b.endAt;
+    return newStart < existingEnd && newEnd > existingStart;
+  });
 }
 
 export function getBookings(from?: string): Booking[] {
